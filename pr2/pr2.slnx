@@ -1,6 +1,4 @@
 <Solution>
-  <Folder Name="/Элементы решения/">
-    <File Path="Transaction" />
-  </Folder>
+  <Folder Name="/Элементы решения/" />
   <Project Path="pr2/pr2.csproj" />
 </Solution>
