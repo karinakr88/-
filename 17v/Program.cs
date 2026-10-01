@@ -73,7 +73,7 @@
             }
 
             /// <summary>
-            /// 1. Поиск пекаря изделия. Не найдено — null.
+            /// 1. Поиск пекаря изделия. Не найдено — null
             /// </summary>
             public static Baker FindBaker(List<Bakery> bakeries, List<Baker> bakers, string itemName)
             {
