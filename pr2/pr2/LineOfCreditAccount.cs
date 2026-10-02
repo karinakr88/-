@@ -1,0 +1,18 @@
+﻿namespace pr2;
+
+internal class LineOfCreditAccount : BankAccount
+{
+    public LineOfCreditAccount(string name, decimal initialBalance, decimal creditLimit)
+        : base (name, initialBalance, -creditLimit) { }
+    public override void PerformMonthAndTransactions()
+    {
+        if (Balance < 0)
+        {
+            decimal interest = -Balance *  0.07m;
+            MakeWithdrawal(interest, DateTime.UtcNow, "Charge monthly interest");
+        }
+    }
+    protected override Transactionn? CheckWithdrawalLimit(bool isOverdrawn) => isOverdrawn ? new Transactionn(-20,
+        DateTime.UtcNow, "apply overdraft") : default;
+}
+

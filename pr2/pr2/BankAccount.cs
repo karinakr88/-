@@ -5,6 +5,7 @@ namespace pr2;
 
 public class BankAccount
 {
+    private readonly decimal _minimumBalance;
     static private int s_accountNumberSeed = 1000000000;
     public string Number { get;  }
     public string Owner { get; private set;  }
@@ -21,12 +22,19 @@ public class BankAccount
         }
     }
 
-    private List<Transactionn> _allTransactions = new List<Transactionn>(); 
+    private List<Transactionn> _allTransactions = new List<Transactionn>();
 
-    public BankAccount(string name, decimal initialBalance) //какой то конструктор хз
+    public BankAccount(string name, decimal initialBalance) : this(name, initialBalance, 0) { }
+
+    public BankAccount(string name, decimal initialBalance, decimal minimumBalance) //какой то конструктор хз
     {
         Owner = name; // this.Owner = name
-        MakeDeposit(initialBalance, DateTime.UtcNow, "Initial Balance");
+        _minimumBalance = minimumBalance;
+        if (initialBalance < 0)
+        {
+
+            MakeDeposit(initialBalance, DateTime.UtcNow, "Initial Balance");
+        }
         Number = s_accountNumberSeed.ToString();
         s_accountNumberSeed++;
     }
@@ -41,16 +49,34 @@ public class BankAccount
     }
     public void MakeWithdrawal(decimal amount, DateTime date, string note)
     {
-        if (amount <= 0)
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(amount);
+        Transactionn? overdraftTransaction = CheckWithdrawalLimit(Balance - amount < _minimumBalance);
+        Transactionn? withdrawal = new(-amount, date, note);
+        _allTransactions.Add(withdrawal);
+        if(overdraftTransaction is not null)
         {
-            throw new ArgumentOutOfRangeException(nameof(amount), "Amount of withdrawal must be positive");
+            _allTransactions.Add(overdraftTransaction);
+
         }
-        if (Balance < amount)
+        //if (amount <= 0)
+        //{
+        //    throw new ArgumentOutOfRangeException(nameof(amount), "Amount of withdrawal must be positive");
+        //}
+        //if (Balance < amount)
+        //{
+        //    throw new InvalidOperationException("Not sufficient rubls for this withdawal");
+        //}
+        //var withdawal = new Transactionn(-amount, date, note);
+        //_allTransactions.Add(withdawal);
+    }
+    protected virtual Transactionn? CheckWithdrawalLimit(bool v)
+    {
+        if (v)
         {
-            throw new InvalidOperationException("Not sufficient rubls for this withdawal");
+            throw new InvalidOperationException
+                ("Not sufficient rubls for this withdrawal");
         }
-        var withdawal = new Transactionn(-amount, date, note);
-        _allTransactions.Add(withdawal);
+        return default;
     }
 
     public string GetAccountHistory()
