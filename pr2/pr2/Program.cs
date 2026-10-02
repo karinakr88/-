@@ -2,7 +2,7 @@
 
 namespace pr2;
 
-internal class Program
+public class Program
 {
     static void Main(string[] args)
     {
@@ -35,5 +35,12 @@ internal class Program
 
         Console.WriteLine(interestEarning);//    ==    Console.WriteLine(interestEarning.ToString());
         Console.WriteLine(interestEarning.GetAccountHistory());
+
+        GiftCartAccount giftCart = new("Yana", 1000m, 5000m);
+        giftCart.MakeDeposit(100m, DateTime.UtcNow, ";");
+        giftCart.MakeWithdrawal(10m, DateTime.UtcNow, ";");
+        giftCart.PerformMonthAndTransactions();
+        Console.WriteLine(giftCart);
+        Console.WriteLine(giftCart.GetAccountHistory());
     }
 }

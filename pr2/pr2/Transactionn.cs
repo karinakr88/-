@@ -1,8 +1,6 @@
-﻿
+﻿namespace pr2;
 
-namespace pr2;
-
-internal record Transactionn(decimal Amount, DateTime date, string Note); // record - Состояние объектов этого класса нельзя изменить
+public record Transactionn(decimal Amount, DateTime date, string Note); // record - Состояние объектов этого класса нельзя изменить
 
 // это то же самое 
 
