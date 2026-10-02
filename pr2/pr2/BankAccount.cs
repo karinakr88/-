@@ -1,7 +1,9 @@
 ﻿
+using System.Text;
+
 namespace pr2;
 
-internal class BankAccount
+public class BankAccount
 {
     static private int s_accountNumberSeed = 1000000000;
     public string Number { get;  }
@@ -50,4 +52,29 @@ internal class BankAccount
         var withdawal = new Transactionn(-amount, date, note);
         _allTransactions.Add(withdawal);
     }
+
+    public string GetAccountHistory()
+    {
+        var report = new StringBuilder();
+        decimal balance = 0;
+        report.AppendLine("Data\t\tAmount\tBalance\tNote");
+        foreach (var item in _allTransactions)
+        {
+            balance += item.Amount;
+            report.AppendLine($"{item.date.ToShortDateString()}\t" + $"{balance}\t{item.Note}");
+        }
+        return report.ToString();
+    }
+
+    public virtual void PerformMonthAndTransactions()
+    {
+
+    }
+    //переопределяем метод который унаследовали от object этот метод должен возвращать строку с состоянием объекта 
+    public override string ToString()
+    //{
+    //    return $"Type: {GetType().Name}\tOwner : {Owner}\tNumber of account : {Number}"
+    //}
+    => $"Type: {GetType().Name}\tOwner : {Owner}\tNumber of account : {Number}";
+
 }

@@ -13,10 +13,11 @@ internal class Program
         Console.WriteLine($"account{account1.Balance} №{account1.Number} {account1.Owner}");
         Console.WriteLine($"account{account2.Balance} №{account2.Number} {account2.Owner}");
 
-        account1.MakeDeposit(23476,DateTime.UtcNow, ":)");
+        account1.MakeDeposit(23476, DateTime.UtcNow, ":)");
         Console.WriteLine(account1.Balance);
         account1.MakeWithdrawal(26, DateTime.UtcNow, ":(");
         Console.WriteLine(account1.Balance);
+        Console.WriteLine(account1.GetAccountHistory());
 
         try
         {
@@ -27,5 +28,12 @@ internal class Program
         {
             Console.WriteLine(e.Message);
         }
+        InterestEarningAccount interestEarning = new("Yana", 1000m); //m-decimal
+        interestEarning.MakeDeposit(100m, DateTime.UtcNow, ";");
+        interestEarning.MakeWithdrawal(10m, DateTime.UtcNow, ";");
+        interestEarning.PerformMonthAndTransactions();
+
+        Console.WriteLine(interestEarning);//    ==    Console.WriteLine(interestEarning.ToString());
+        Console.WriteLine(interestEarning.GetAccountHistory());
     }
 }
