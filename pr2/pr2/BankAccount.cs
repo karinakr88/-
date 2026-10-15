@@ -11,7 +11,7 @@ public class BankAccount
     private readonly decimal _minimumBalance;
     static private int s_accountNumberSeed = 1000000000;
     /// <summary>
-    /// Уникальный номер счёта.
+    /// Уникальный номер счёта
     /// </summary>
     public string Number { get;  }
     /// <summary>
