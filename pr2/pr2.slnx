@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/src/">
+    <Project Path="src/BankAccounts.Core/BankAccounts.Core.csproj" Id="9fdfe864-728c-46bf-bc23-f2f199fdbff9" />
+  </Folder>
   <Folder Name="/Элементы решения/" />
-  <Project Path="pr2/pr2.csproj" />
+  <Project Path="pr2/BankAccounts.VisualConsole.csproj" />
 </Solution>
