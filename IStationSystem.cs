@@ -1,6 +1,5 @@
 ﻿namespace game;
 
-
 // Интерфейс для общения с пультом
 public interface IShipConsole
 {
