@@ -6,8 +6,6 @@ public abstract class BaseDockingComputer : IDockingComputer
     public abstract int GenerateTargetThrust(int min, int max);
     public abstract string GetComputerName();
 }
-
-// Обычный компьютер (генерирует нормальную тягу)
 public class NormalComputer : BaseDockingComputer
 {
     private Random _rand = new Random();
@@ -36,7 +34,6 @@ public class BrokenComputer : BaseDockingComputer
         return "Аварийный компьютер (сбой)";
     }
 }
-
 // Главный класс управления стыковкой
 public class DockingModule
 {
