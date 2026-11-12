@@ -41,7 +41,7 @@ public class DockingModule
     private readonly IDockingComputer _computer;
     private readonly FlightSettings _settings;
 
-    // События (Требование 3)
+    // События 
     public event Action<int, bool, int, string>? OnDockingFinished; // (цель, успех, попытки, имя ПК)
     public event Action<string>? OnThrusterWarning; // Предупреждение двигателей
 
